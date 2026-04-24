@@ -2,12 +2,13 @@
 
 IMAGE_TAG = ghcr.io/tien886/buddyai:latest
 
-up:
-	@echo ">> Pulling BuddyAI image..."
+pull-backend:
+	@echo ">> Pulling backend image: $(IMAGE_TAG)"
 	podman pull $(IMAGE_TAG)
 
-	@echo ">> Starting BuddyAI..."
-	IMAGE_TAG=$(IMAGE_TAG) podman compose \
+up: pull-backend
+	@echo ">> Starting stack with image: $(IMAGE_TAG)"
+	IMAGE_TAG=$(IMAGE_TAG) podman-compose \
 		-f docker-compose-prod.yml \
-		--env-file buddyai.env \
+		--env-file backend.env \
 		up -d
