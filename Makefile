@@ -8,7 +8,7 @@ pull-image:
 
 up: pull-image
 	@echo ">> Starting BuddyAI..."
-	IMAGE_TAG=$(IMAGE_TAG) podman-compose \
+	IMAGE_TAG=$(IMAGE_TAG) podman compose \
 		-f docker-compose-prod.yml \
 		--env-file buddyai.env \
 		up -d
