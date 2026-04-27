@@ -2,14 +2,17 @@
 
 IMAGE_TAG = ghcr.io/tien886/buddyai:latest
 
-pull-image:
+server-processing:
+	@echo "Pull down server..."
+	podman compose -f docker-compose-prod.yaml --env-file buddyai.env down
 	@echo ">> Pulling BuddyAI image: $(IMAGE_TAG)"
 	podman pull $(IMAGE_TAG)
 
 	@echo ">> Pulling Neo4j image..."
 	podman pull docker.io/library/neo4j:5.26-community
 
-up: pull-image
+up: 
+	server-processing
 	@echo ">> Starting BuddyAI..."
 	IMAGE_TAG=$(IMAGE_TAG) podman compose \
 		-f docker-compose-prod.yml \
