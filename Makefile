@@ -15,10 +15,13 @@ server-processing:
 	podman pull docker.io/library/neo4j:5.26-community
 
 up: server-processing
-	@echo ">> Starting BuddyAI..."
+	@echo ">> Activate Buddy..."
 	IMAGE_TAG=$(IMAGE_TAG) podman compose \
 		-f $(COMPOSE_FILE) \
 		--env-file $(ENV_FILE) \
 		up -d --force-recreate
-	@echo "Start BuddyAi..."
+
+start:
+	@echo "Start BuddyAI ..."
+	podman stop buddyai-rag
 	podman start buddyai-rag
