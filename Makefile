@@ -1,4 +1,4 @@
-.PHONY: up server-processing
+.PHONY: up server-processing start
 
 IMAGE_TAG = ghcr.io/tien886/buddyai:latest
 COMPOSE_FILE = docker-compose-prod.yml
