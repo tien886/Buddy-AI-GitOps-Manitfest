@@ -19,9 +19,4 @@ up: server-processing
 	IMAGE_TAG=$(IMAGE_TAG) podman compose \
 		-f $(COMPOSE_FILE) \
 		--env-file $(ENV_FILE) \
-		up -d --force-recreate
-
-start:
-	@echo "Start BuddyAI ..."
-	podman stop buddyai-rag
-	podman start buddyai-rag
+		up -d 
