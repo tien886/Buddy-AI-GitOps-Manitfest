@@ -1,10 +1,13 @@
-.PHONY: up
+.PHONY: up server-processing
 
 IMAGE_TAG = ghcr.io/tien886/buddyai:latest
+COMPOSE_FILE = docker-compose-prod.yml
+ENV_FILE = buddyai.env
 
 server-processing:
 	@echo "Pull down server..."
-	podman compose -f docker-compose-prod.yaml --env-file buddyai.env down
+	podman compose -f $(COMPOSE_FILE) --env-file $(ENV_FILE) down
+
 	@echo ">> Pulling BuddyAI image: $(IMAGE_TAG)"
 	podman pull $(IMAGE_TAG)
 
@@ -14,6 +17,6 @@ server-processing:
 up: server-processing
 	@echo ">> Starting BuddyAI..."
 	IMAGE_TAG=$(IMAGE_TAG) podman compose \
-		-f docker-compose-prod.yml \
-		--env-file buddyai.env \
-		up -d
+		-f $(COMPOSE_FILE) \
+		--env-file $(ENV_FILE) \
+		up -d --force-recreate
