@@ -11,8 +11,7 @@ server-processing:
 	@echo ">> Pulling Neo4j image..."
 	podman pull docker.io/library/neo4j:5.26-community
 
-up: 
-	server-processing
+up: server-processing
 	@echo ">> Starting BuddyAI..."
 	IMAGE_TAG=$(IMAGE_TAG) podman compose \
 		-f docker-compose-prod.yml \
