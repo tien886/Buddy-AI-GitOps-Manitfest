@@ -20,3 +20,8 @@ up: server-processing
 		-f $(COMPOSE_FILE) \
 		--env-file $(ENV_FILE) \
 		up -d --force-recreate
+
+restart:
+	@echo ">> Restarting BuddyAI..."
+	podman restart buddyai-rag
+	podman restart buddyai-rag
