@@ -24,4 +24,3 @@ up: server-processing
 restart:
 	@echo ">> Restarting BuddyAI..."
 	podman restart buddyai-rag
-	podman restart buddyai-rag
