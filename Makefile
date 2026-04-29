@@ -5,7 +5,7 @@ COMPOSE_FILE = docker-compose-prod.yml
 ENV_FILE = buddyai.env
 
 server-processing:
-	@echo "Pull down server..."
+	@echo ">> Stopping server..."
 	podman compose -f $(COMPOSE_FILE) --env-file $(ENV_FILE) down
 
 	@echo ">> Pulling BuddyAI image: $(IMAGE_TAG)"
@@ -15,8 +15,8 @@ server-processing:
 	podman pull docker.io/library/neo4j:5.26-community
 
 up: server-processing
-	@echo ">> Activate Buddy..."
+	@echo ">> Starting BuddyAI..."
 	IMAGE_TAG=$(IMAGE_TAG) podman compose \
 		-f $(COMPOSE_FILE) \
 		--env-file $(ENV_FILE) \
-		up -d 
+		up -d --force-recreate
