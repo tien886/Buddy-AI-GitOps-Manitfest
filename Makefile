@@ -8,6 +8,9 @@ server-processing:
 	@echo ">> Stopping server..."
 	podman compose -f $(COMPOSE_FILE) --env-file $(ENV_FILE) down
 
+	@echo ">> Fix rootless Podman state..."
+	podman system migrate || true
+
 	@echo ">> Pulling BuddyAI image: $(IMAGE_TAG)"
 	podman pull $(IMAGE_TAG)
 
